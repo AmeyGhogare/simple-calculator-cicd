@@ -1,5 +1,5 @@
 
-name: Simple Calculator CI
+name: Simple Calculator CI/CD
 
 on:
   push:
@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   test:
+    name: Run Calculator Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +23,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Run calculator unit tests
         run: python -m unittest discover -v
+
+  deploy:
+    name: Deployment Demo
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simulate Deployment
+        run: echo "Tests passed. Ready for deployment!"
